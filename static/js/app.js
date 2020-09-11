@@ -76,7 +76,7 @@ function buildPlot(id) {
 }
 
 function demoInfo(id) {
-    d3.json("./data/samples.json").then((data) => {
+    d3.json("../data/samples.json").then((data) => {
 
         // Store the metadata 
         var metadata = data.metadata;
@@ -104,7 +104,7 @@ function optionChanged(newSubject) {
 function init() {
     var dropdown = d3.select("#selDataset");
 
-    d3.json("./data/samples.json").then((data) => {
+    d3.json("../data/samples.json").then((data) => {
         console.log(data)
     // });
 
