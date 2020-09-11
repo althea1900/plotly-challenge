@@ -15,7 +15,7 @@ function buildPlot(id) {
     
     // display otu id's 
     var otuID = otuTop10.map(d => "OTU " + d)
-        console.log(`OTU IDS: ${otuID}`)  
+        // console.log(`OTU IDS: ${otuID}`)  
         
     // Use top 10 labels for chart
     var chartlabels = subjectData.otu_labels.slice(0, 10);
@@ -48,6 +48,29 @@ function buildPlot(id) {
 
     //Make the bar chart
     Plotly.newPlot("bar", data, layout);
+
+    //Make the bubble chart
+     
+        var bubbleTrace = {
+          x: subjectData.otu_ids,
+          y: subjectData.sample_values,
+          text: subjectData.otu_labels,
+          mode: `markers`,
+          marker: {
+            size: subjectData.sample_values,
+            color: subjectData.otu_ids
+          }
+        };
+    
+        // set the bubble layout
+        var data = [bubbleTrace];
+        var layout = {
+          title: "Belly Button Bacteria",
+          xaxis: {title: "OTU ID"},
+          height: 600, 
+          width:  1000
+        };
+        Plotly.newPlot("bubble", data, layout);
 
     });
 }
