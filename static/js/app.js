@@ -22,7 +22,7 @@ function buildPlot(id) {
  
     // Make the Trace variable for the chart
     var trace = {
-        x: subjectData,
+        x: subjectValues,
         y: otuID,
         text: chartlabels,
         marker: {
