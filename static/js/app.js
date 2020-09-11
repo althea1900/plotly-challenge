@@ -1,6 +1,6 @@
 
 function buildPlot(id) {
-    d3.json("./data/samples.json").then((data) => {
+    d3.json("/data/samples.json").then((data) => {
         console.log(data);
 
     // filter sample values by id 
@@ -52,9 +52,29 @@ function buildPlot(id) {
     });
 }
 
+function demoInfo(id) {
+    d3.json("/data/samples.json").then((data) => {
+
+        // Store the metadata 
+        var metadata = data.metadata;
+            console.log(metadata);
+
+        // Get the metadata for the current id 
+        var subjectInfo = metadata.filter(meta => meta.id.toString()=== id)[0];
+        
+        // Put Demographs info onto page
+        var demochart = d3.select("#sample-metadata");
+        demochart.html("");
+        Object.entries(subjectInfo).forEach((key) => {
+            demochart.append("p").text(key[0].toUpperCase() + ": " + key[1] + "\n"); 
+        });
+    });
+}
+
 function optionChanged(newSubject) {
     buildPlot(newSubject);
     console.log("changed")
+    demoInfo(newSubject);
 }
 
 
@@ -71,6 +91,7 @@ function init() {
         });
 
         buildPlot(data.names[0]);
+        demoInfo(data.names[0]);
     });
 }
 
